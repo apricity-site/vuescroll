@@ -7,12 +7,10 @@
     */
    
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('vue')) :
-	typeof define === 'function' && define.amd ? define(['vue'], factory) :
-	(global.vuescroll = factory(global.Vue));
-}(this, (function (Vue) { 'use strict';
-
-Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue;
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.vuescroll = factory());
+}(this, (function () { 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
@@ -149,7 +147,7 @@ var isIos = function isIos() {
 
 /* istanbul ignore next */
 var isServer = function isServer() {
-  return Vue.prototype.$isServer;
+  return typeof window === 'undefined';
 };
 
 var touchManager = function () {
@@ -5094,11 +5092,11 @@ var configValidators = [configValidator$1, configValidator];
 
 var component = _install(core$1, createPanel$2, configs, configValidators);
 
-function install(Vue$$1) {
+function install(app) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  Vue$$1.component(opts.name || component.name, component);
-  Vue$$1.prototype.$vuescrollConfig = opts.ops || {};
+  app.component(opts.name || component.name, component);
+  app.prototype.$vuescrollConfig = opts.ops || {};
 }
 
 var Vuescroll = _extends({
@@ -5107,11 +5105,6 @@ var Vuescroll = _extends({
   refreshAll: refreshAll,
   scrollTo: scrollTo
 }, component);
-
-/* istanbul ignore if */
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(Vuescroll);
-}
 
 return Vuescroll;
 

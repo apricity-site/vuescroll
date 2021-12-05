@@ -5,6 +5,7 @@ const resolve = p => path.resolve(__dirname, '../', p);
 const alias = {
   src: resolve('src'),
   test: resolve('./test'),
+  vue: '@vue/compat',
   vue$: 'vue/dist/vue.js'
 };
 

@@ -1,4 +1,3 @@
-import Vue from 'vue';
 
 export function isIE() {
   /* istanbul ignore if */
@@ -21,7 +20,7 @@ export const isIos = () => {
 };
 
 /* istanbul ignore next */
-export const isServer = () => Vue.prototype.$isServer;
+export const isServer = () => typeof window === 'undefined';
 
 export class touchManager {
   getEventObject(originEvent) {
